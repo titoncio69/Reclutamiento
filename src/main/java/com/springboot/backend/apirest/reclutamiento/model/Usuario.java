@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "usuario")
@@ -40,7 +41,9 @@ public class Usuario {
 	private Boolean enabled;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
+	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), 
+									 inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"),
+									 uniqueConstraints = {@UniqueConstraint(columnNames = {"id_usuario", "id_rol"})})
 	private List<Rol> roles;
 
 	public Integer getIdUsuario() {

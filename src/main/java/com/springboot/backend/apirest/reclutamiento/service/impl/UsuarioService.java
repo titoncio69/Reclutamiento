@@ -1,9 +1,16 @@
 package com.springboot.backend.apirest.reclutamiento.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +20,7 @@ import com.springboot.backend.apirest.reclutamiento.repository.IUsuarioRepositor
 import com.springboot.backend.apirest.reclutamiento.service.IUsuarioService;
 
 @Service
-public class UsuarioService implements IUsuarioService {
+public class UsuarioService implements IUsuarioService, UserDetailsService {
 
 	@Autowired
 	private IUsuarioRepository repo;
@@ -51,6 +58,23 @@ public class UsuarioService implements IUsuarioService {
 		}
 		repo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario u = repo.findByUsername(username);
+		if(u == null) {
+			throw new UsernameNotFoundException("Usuario no existe : " + username);
+		}
+		
+		List<GrantedAuthority> roles = new ArrayList<>();
+		u.getRoles().forEach(rol -> {
+			roles.add(new SimpleGrantedAuthority(rol.getNombre()));
+		});
+		
+		UserDetails userDetail = new User(u.getUsername(), u.getPassword(), roles);
+		return userDetail;
 	}
 
 }

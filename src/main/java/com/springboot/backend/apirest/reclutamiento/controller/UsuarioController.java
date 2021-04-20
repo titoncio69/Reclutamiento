@@ -20,37 +20,37 @@ import com.springboot.backend.apirest.reclutamiento.model.Usuario;
 import com.springboot.backend.apirest.reclutamiento.service.IUsuarioService;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api")
 public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService service;
 	
-	@GetMapping
+	@GetMapping("/usuarios")
 	public ResponseEntity<List<Usuario>> listar(){
 		List<Usuario> lista = service.findAll();
 		return new ResponseEntity<List<Usuario>>(lista, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/usuarios/{id}")
 	public ResponseEntity<Usuario> listarPorId(@PathVariable Integer id) throws Exception{
 		Usuario obj = service.findById(id);
 		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
 	}
 	
-	@PostMapping
+	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> guardar(@Valid @RequestBody Usuario usuario){
 		Usuario obj = service.save(usuario);
 		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
 	}
 	
-	@PutMapping
+	@PutMapping("/usuarios")
 	public ResponseEntity<Usuario> modificar(@Valid @RequestBody Usuario usuario){
 		Usuario obj = service.update(usuario);
 		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/usuarios/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) throws Exception {
 		service.deleteById(id);
 		return new ResponseEntity<Object>("Usuario " + id + " eliminado.", HttpStatus.OK);

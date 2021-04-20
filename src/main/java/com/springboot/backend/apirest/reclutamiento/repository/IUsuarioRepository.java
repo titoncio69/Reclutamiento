@@ -6,5 +6,5 @@ import com.springboot.backend.apirest.reclutamiento.model.Usuario;
 
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	Usuario findOneByUsername(String username);
+	Usuario findByUsername(String username);
 }
