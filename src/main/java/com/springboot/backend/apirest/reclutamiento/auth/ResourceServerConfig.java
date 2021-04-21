@@ -23,8 +23,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-//		.antMatchers(HttpMethod.GET, "/api/usuarios").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/**").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/**").permitAll()
+//		.antMatchers(HttpMethod.GET, "/api/**").hasRole("ADMIN")
+		.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource()); 
 	}
