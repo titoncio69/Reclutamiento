@@ -8,6 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.springboot.backend.apirest.reclutamiento.enums.NivelEnum;
+import com.springboot.backend.apirest.reclutamiento.model.Perfil;
+
 @SpringBootApplication
 public class SpringBootBackendApirestReclutamientoApplication implements CommandLineRunner{
 

@@ -1,5 +1,6 @@
 package com.springboot.backend.apirest.reclutamiento.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,10 +14,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import com.springboot.backend.apirest.reclutamiento.enums.NivelEnum;
 
 @Entity
 @Table(name = "perfil")
-public class Perfil {
+public class Perfil implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +31,13 @@ public class Perfil {
 
 	@Column(name = "enabled")
 	private Boolean enabled;
-	
+
 	@Column(name = "nivel")
-	private String nivel;
+	private NivelEnum nivel;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "perfil_skill", joinColumns = @JoinColumn(name = "id_perfil", referencedColumnName = "idPerfil"), 
-									 inverseJoinColumns = @JoinColumn(name = "id_skill", referencedColumnName = "idSkill"),
-									 uniqueConstraints = {@UniqueConstraint(columnNames = {"id_perfil", "id_skill"})})
+	@JoinTable(name = "perfil_skill", joinColumns = @JoinColumn(name = "id_perfil", referencedColumnName = "idPerfil"), inverseJoinColumns = @JoinColumn(name = "id_skill", referencedColumnName = "idSkill"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "id_perfil", "id_skill" }) })
 	private List<Skill> skills;
 
 	public Integer getIdPerfil() {
@@ -69,4 +72,11 @@ public class Perfil {
 		this.skills = skills;
 	}
 
+	public NivelEnum getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(NivelEnum nivel) {
+		this.nivel = nivel;
+	}
 }

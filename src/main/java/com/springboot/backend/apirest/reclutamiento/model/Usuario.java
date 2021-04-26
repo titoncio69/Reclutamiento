@@ -1,5 +1,6 @@
 package com.springboot.backend.apirest.reclutamiento.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,7 +17,9 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +43,9 @@ public class Usuario {
 	@Column(name = "enabled")
 	private Boolean enabled;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), 
-									 inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"),
-									 uniqueConstraints = {@UniqueConstraint(columnNames = {"id_usuario", "id_rol"})})
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "id_usuario", "id_rol" }) })
 	private List<Rol> roles;
 
 	public Integer getIdUsuario() {
@@ -112,8 +114,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", email=" + email + ", enabled=" + enabled + "]";
+		return "Usuario [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", nombre="
+				+ nombre + ", apellido=" + apellido + ", email=" + email + ", enabled=" + enabled + "]";
 	}
 
 }

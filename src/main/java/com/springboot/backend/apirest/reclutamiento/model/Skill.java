@@ -1,5 +1,7 @@
 package com.springboot.backend.apirest.reclutamiento.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,22 +11,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "skill")
-public class Skill {
-	
+public class Skill implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idSkill;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Column(name = "descripcion")
 	private String descripcion;
 
 	public Integer getIdSkill() {
 		return idSkill;
 	}
- 
+
 	public void setIdSkill(Integer idSkill) {
 		this.idSkill = idSkill;
 	}
@@ -49,5 +53,5 @@ public class Skill {
 	public String toString() {
 		return "Skill [idSkill=" + idSkill + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
 	}
-	
+
 }
