@@ -16,6 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.backend.apirest.reclutamiento.enums.SexoEnum;
@@ -30,7 +33,9 @@ public class Empleado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEmpleado;
 
-	@Column(name = "nombre")
+	@NotEmpty(message = "no puede estar vacio")
+	@Size(min = 4, max = 50, message = "el tamaño tiene que estar entre 4 y 50")
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
 
 	@Column(name = "apellidoP")
@@ -45,6 +50,7 @@ public class Empleado implements Serializable {
 	@Column(name = "sexo")
 	private SexoEnum sexo;
 
+	@Email(message = "no es una dirección de correo bien formada")
 	@Column(name = "email")
 	private String email;
 

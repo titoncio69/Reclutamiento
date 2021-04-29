@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.backend.apirest.reclutamiento.model.Skill;
-import com.springboot.backend.apirest.reclutamiento.model.Usuario;
 import com.springboot.backend.apirest.reclutamiento.service.ISkillService;
 
 @RestController

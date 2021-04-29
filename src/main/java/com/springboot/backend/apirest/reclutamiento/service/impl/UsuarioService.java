@@ -24,7 +24,7 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
 
 	@Autowired
 	private IUsuarioRepository repo;
-
+	
 	@Override
 	public Usuario findById(Integer id) throws Exception {
 		Optional<Usuario> op = repo.findById(id);

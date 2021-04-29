@@ -1,10 +1,10 @@
 /* Creamos algunos usuarios con sus roles */
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('cristian','$2a$10$h.Hy6T1NNyCT6C75MnGI4Oi108/Gu7.2B3jYTdMjoTArhNvRf5xQi', 'Cristian', 'Marambio','cristianmarambio17@gmail.com', true);
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('admin','$2a$10$Rd2s.3rXUC9FCrJVGViA2eB4aARdb7rcn4msIGcK6BzDKUVLAC3Ui', 'Admin', 'Administrador','admin@gmail.com', true);
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('daniel','$2a$10$zhkp7/P3IiaoLH0F4P/IkuvoIZ5G4NaSiBnCOPEFKWuMo46R4Odyi', 'Daniel', 'Marambio','daniel.marambio@gmail.com', true);
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('tania','$2a$10$sB/8i8n1RWoME9842JbiH.a/hyREuAR4KvIEQRtsZ5rXaO2EEX48y', 'Tania', 'heresi','tania_smg@gmail.com', true);
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('juan','$2a$10$ZNhyifLid4Eqs2eZSa0nKOsRaIbMHfS.N4EZ7jICH21aSYz30UsRG', 'Juan', 'Marambio','juancarlosconfecciones@gmail.com', true);
-INSERT INTO usuario (username, password, nombre, apellido, email, enabled) VALUES ('gatuso','$2a$10$YHoTFv10wJJ.84VPH0/3yeu2l2B20phTHajJXhMDUysR4xr.Pp9Wq', 'Gaston', 'Gatuso','gastongatuso@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('cristian','$2a$10$bfE.o2Nw3yAkrulFmy64GO2vtY6ICt2W0ZdBOq5.zSXVVwJ77w//y', '$2a$10$bfE.o2Nw3yAkrulFmy64GO2vtY6ICt2W0ZdBOq5.zSXVVwJ77w//y','Cristian', 'Marambio','cristianmarambio17@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('admin','$2a$10$d6vK5R2JU4PVNUW35SBwTuWIWFYabsEl.4vk6AJJ/K62iAHnTkfyO', '$2a$10$d6vK5R2JU4PVNUW35SBwTuWIWFYabsEl.4vk6AJJ/K62iAHnTkfyO','Admin', 'Administrador','admin@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('daniel','$2a$10$7aYpxZpiVPHpkon9UpUUJ.cEUb9.dqmQYVYW2vq/N/rnEi/8cI5nO', '$2a$10$7aYpxZpiVPHpkon9UpUUJ.cEUb9.dqmQYVYW2vq/N/rnEi/8cI5nO','Daniel', 'Marambio','daniel.marambio@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('tania','$2a$10$pGXQY4.GUSIZl7DwhdD1b.SIFBdEEqC3T54tHw8/oo3Nd3/GGaRTu', '$2a$10$pGXQY4.GUSIZl7DwhdD1b.SIFBdEEqC3T54tHw8/oo3Nd3/GGaRTu','Tania', 'heresi','tania_smg@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('juan','$2a$10$l4qCprd6qnRoPlqAGTKuGuXPB18Z0.ZNMWhTwlweGu32C5Bd29Lmu', '$2a$10$l4qCprd6qnRoPlqAGTKuGuXPB18Z0.ZNMWhTwlweGu32C5Bd29Lmu','Juan', 'Marambio','juancarlosconfecciones@gmail.com', true);
+INSERT INTO usuario (username, password, repeat_password, nombre, apellido, email, enabled) VALUES ('gatuso','$2a$10$ocKTFpiW3rfMSpgODCBXhOopJD9IIwNf1AETIEVRSke1KGUS1VN9m', '$2a$10$ocKTFpiW3rfMSpgODCBXhOopJD9IIwNf1AETIEVRSke1KGUS1VN9m','Gaston', 'Gatuso','gastongatuso@gmail.com', true);
 
 INSERT INTO rol (nombre) VALUES ('ROLE_USER');
 INSERT INTO rol (nombre) VALUES ('ROLE_ADMIN');

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
+	
 	@GetMapping("/usuarios")
 	public ResponseEntity<List<Usuario>> listar(){
 		List<Usuario> lista = service.findAll();
@@ -39,9 +43,18 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuarios")
-	public ResponseEntity<Usuario> guardar(@Valid @RequestBody Usuario usuario){
-		Usuario obj = service.save(usuario);
-		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
+	public ResponseEntity<Object> guardar(@Valid @RequestBody Usuario usuario){
+		Usuario obj = new Usuario();
+		if(usuario.getPassword().equals(usuario.getRepeatPassword())) {
+			String passEncode = bcrypt.encode(usuario.getPassword());
+			String repeatPassEncode = bcrypt.encode(usuario.getRepeatPassword());
+			usuario.setPassword(passEncode);
+			usuario.setRepeatPassword(repeatPassEncode);
+			 obj = service.save(usuario);
+			return new ResponseEntity<Object>(obj, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Object>("Las contraseñas no son iguales", HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
 	
 	@PutMapping("/usuarios")

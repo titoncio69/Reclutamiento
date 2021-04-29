@@ -14,6 +14,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.springboot.backend.apirest.reclutamiento.constraint.ValidPassword;
 
 @Entity
 @Table(name = "usuario")
@@ -25,11 +30,20 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
 
-	@Column(name = "username")
+	@NotEmpty(message = "no puede estar vacio")
+	@Size(min = 4, max = 50, message = "el tamaño tiene que estar entre 4 y 50")
+	@Column(name = "username", nullable = false)
 	private String username;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
+//	@Size(min = 8, max = 100, message = "el tamaño tiene que estar entre 8 y 100")
+	@ValidPassword
 	private String password;
+
+	@Column(name = "repeat_password", nullable = false)
+//	@Size(min = 8, max = 100, message = "el tamaño tiene que estar entre 8 y 100")
+	@ValidPassword
+	private String repeatPassword;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -37,7 +51,9 @@ public class Usuario implements Serializable {
 	@Column(name = "apellido")
 	private String apellido;
 
-	@Column(name = "email")
+	@NotEmpty(message = "no puede estar vacio")
+	@Email(message = "no es una dirección de correo bien formada")
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
 	@Column(name = "enabled")
@@ -78,6 +94,14 @@ public class Usuario implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
 	}
 
 	public String getNombre() {

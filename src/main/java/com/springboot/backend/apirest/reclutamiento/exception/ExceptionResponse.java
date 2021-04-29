@@ -1,13 +1,14 @@
 package com.springboot.backend.apirest.reclutamiento.exception;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ExceptionResponse {
 	private LocalDateTime timestamp;
 	private String mensaje;
-	private String detalles;
+	private List<String> detalles;
 
-	public ExceptionResponse(LocalDateTime timestamp, String mensaje, String detalles) {
+	public ExceptionResponse(LocalDateTime timestamp, String mensaje, List<String> detalles) {
 		this.timestamp = timestamp;
 		this.mensaje = mensaje;
 		this.detalles = detalles;
@@ -29,11 +30,11 @@ public class ExceptionResponse {
 		this.mensaje = mensaje;
 	}
 
-	public String getDetalles() {
+	public List<String> getDetalles() {
 		return detalles;
 	}
 
-	public void setDetalles(String detalles) {
+	public void setDetalles(List<String> detalles) {
 		this.detalles = detalles;
 	}
 }
